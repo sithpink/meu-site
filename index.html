@@ -1,0 +1,230 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>💖 El Juego del Destino 💖</title>
+    <style>
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(-20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        @keyframes float {
+            0% { transform: translateY(0); }
+            50% { transform: translateY(-15px); }
+            100% { transform: translateY(0); }
+        }
+        @keyframes pulse {
+            0% { transform: scale(1); }
+            50% { transform: scale(1.1); }
+            100% { transform: scale(1); }
+        }
+        body {
+            font-family: 'Verdana', sans-serif;
+            text-align: center;
+            background: linear-gradient(45deg, #3b2e5a, #6a3f87, #b34d8a);
+            background-size: 400% 400%;
+            animation: gradientAnimation 10s ease infinite;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+            overflow: hidden;
+            color: white;
+            flex-direction: column;
+            position: relative;
+        }
+
+        @keyframes gradientAnimation {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
+        }
+
+        .container {
+            width: 80%;
+            max-width: 800px;
+            background: rgba(0, 0, 0, 0.5);
+            padding: 50px;
+            border-radius: 20px;
+            box-shadow: 0px 0px 40px rgba(0,0,0,0.8);
+            animation: fadeIn 1.5s ease-in-out;
+            position: relative;
+            backdrop-filter: blur(20px);
+        }
+
+        h2 {
+            font-family: 'Dancing Script', cursive;
+            font-size: 48px;
+            font-weight: bold;
+            letter-spacing: 2px;
+            margin-bottom: 20px;
+            color: #F0E68C; 
+            text-shadow: 0 0 10px rgba(240, 230, 140, 0.8), 0 0 20px rgba(240, 230, 140, 0.6); 
+        }
+
+        h2:hover {
+            color: #FFD700; 
+            text-shadow: 0 0 15px rgba(255, 215, 0, 1), 0 0 30px rgba(255, 215, 0, 0.8);
+        }
+
+        p {
+            font-size: 28px;
+            animation: fadeIn 1.5s ease-in-out;
+            margin-bottom: 40px;
+            color: #FFDB58; 
+        }
+
+        button {
+            background: #FF4081;
+            color: white;
+            padding: 20px;
+            border: none;
+            border-radius: 30px;
+            cursor: pointer;
+            margin: 20px;
+            font-size: 26px;
+            transition: transform 0.3s ease, background 0.3s;
+            width: 80%;
+            max-width: 500px;
+            box-shadow: 0 8px 30px rgba(255, 64, 129, 0.3);
+        }
+
+        button:hover {
+            background: #FF1A66;
+            transform: scale(1.1);
+            box-shadow: 0 12px 40px rgba(255, 64, 129, 0.5);
+        }
+
+        button:active {
+            background: #E6005C;
+        }
+
+        .hearts, .flowers {
+            position: absolute;
+            font-size: 50px;
+            opacity: 0.8;
+            animation: float 5s infinite ease-in-out;
+            pointer-events: none;
+        }
+
+        .final-message {
+            font-family: 'Dancing Script', cursive;
+            font-size: 36px;
+            color: #F0E68C; 
+            animation: fadeIn 1.5s ease-in-out, pulse 2s infinite;
+            font-weight: bold;
+            letter-spacing: 1px;
+            text-shadow: 0 0 15px rgba(240, 230, 140, 0.8), 0 0 25px rgba(240, 230, 140, 0.6); 
+        }
+
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h2>💖 El Juego del Destino 💖</h2>
+        <p id="question">¿Crees que el destino nos ha reunido? 💘</p>
+        <button onclick="nextQuestion(true)">¡Sí, el destino tiene magia! 💞</button>
+        <button onclick="nextQuestion(false)">No lo sé... ¡Sorpréndeme! ✨</button>
+    </div>
+
+    <script>
+        let questions = [
+            "¿Crees que el amor tiene el poder de conectar almas? 💫",
+            "Si alguien hiciera algo especial solo para ti, ¿te emocionaría? 🥰",
+            "Si te dijera que me gustas muchísimo, ¿te haría sonreír? 😊",
+            "Entonces... ¿te gustaría tener una cita mágica conmigo? 💖"
+        ];
+
+        let index = 0;
+
+        function nextQuestion(answer) {
+            if (index < questions.length - 1) {
+                index++;
+                let questionElement = document.getElementById("question");
+                questionElement.style.opacity = 0;
+                setTimeout(() => {
+                    questionElement.textContent = questions[index];
+                    questionElement.style.opacity = 1;
+                }, 300);
+            } else {
+                document.querySelector(".container").innerHTML = `
+                    <h2 class='final-message'>✨ El destino nos unió... ¿Me dejas robarte una sonrisa en una cita mágica? 💘 ✨</h2>
+                    <button onclick='finalMessage()'>¡Sí! ¡Será una cita mágica! 💃💖</button>
+                    <button onclick='playfulNo()'>Hmm... dime algo aún más romántico 😏</button>
+                `;
+                createElements();
+            }
+        }
+
+        function finalMessage() {
+            document.querySelector(".container").innerHTML = `
+                <h2 class='final-message'>🎆 ¡El universo conspiró para que nos encontráramos! 🎆</h2>
+                <p class='final-message'>Desde que nos cruzamos, supe que eras alguien especial... ¡No puedo esperar para verte! 💖</p>
+                <h2 class='final-message'>💘 ¡Esta cita será inolvidable! 💘</h2>
+                <button onclick="goToMinigame()">¡Sí, quiero jugar al minijuego! 🎮💖</button>
+                <button onclick="stayHere()">Prefiero quedarme aquí un poco más 💕</button>
+            `;
+        }
+
+        function goToMinigame() {
+            window.location.href = "jogocoracao.html"; 
+        }
+
+        function stayHere() {
+            document.querySelector(".container").innerHTML = `
+                <h2 class='final-message'>💖 ¡Gracias por quedarte un poco más conmigo! 💖</h2>
+                <p class='final-message'>Siempre es un placer pasar tiempo contigo... 😊</p>
+            `;
+        }
+
+        function playfulNo() {
+            document.querySelector(".container").innerHTML = `
+                <h2 class='final-message'>Déjame demostrarte cuánto significas para mí... 💘</h2>
+                <button onclick='finalMessage()'>Bueno... ¡Sí, quiero! 🥰</button>
+            `;
+            createElements();
+        }
+       
+        function createElements() {
+            
+            for (let i = 0; i < 15; i++) {
+                let heart = document.createElement("div");
+                heart.classList.add("hearts");
+                heart.innerHTML = "❤️";
+                document.body.appendChild(heart);
+                animateElement(heart);
+
+                let flower = document.createElement("div");
+                flower.classList.add("flowers");
+                flower.innerHTML = "🌸";
+                document.body.appendChild(flower);
+                animateElement(flower);
+            }
+        }
+        
+
+        function animateElement(element) {
+            let x = Math.random() * window.innerWidth;
+            let y = window.innerHeight + 50;
+            element.style.position = "absolute";
+            element.style.left = `${x}px`;
+            element.style.top = `${y}px`;
+            let speed = Math.random() * 3 + 2;
+            let opacity = Math.random() * 0.7 + 0.3;
+            element.style.opacity = opacity;
+            element.style.fontSize = `${Math.random() * 35 + 45}px`;
+            let interval = setInterval(() => {
+                y -= speed;
+                element.style.top = `${y}px`;
+                if (y < -50) {
+                    clearInterval(interval);
+                    element.remove();
+                }
+            }, 50);
+        }
+        
+    </script>
+</body>
+</html>
